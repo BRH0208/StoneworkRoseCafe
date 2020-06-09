@@ -12,16 +12,10 @@ namespace StoneworkRoseCafe.Mugs {
 		private string displayName;
 		private string texturePath;
 		public int tile;
-		public override bool CloneNewInstances => true;
-		public override string Texture => texturePath;
 
-		public override bool Autoload(ref string name) {
-			return false;
-		}
-
-		public Mug(string name, string texture) {
-			displayName = name;
-			texturePath = texture;
+		public Mug(string displayName, string texturePath) {
+			this.displayName = displayName;
+			this.texturePath = texturePath;
 		}
 
 		public override void SetStaticDefaults() {
