@@ -7,10 +7,17 @@ using static Terraria.ModLoader.ModContent;
 namespace StoneworkRoseCafe.Mugs.Tiles {
     class MugTile : ModTile {
         public static int dropItem;
-        public MugTile(ModItem item) {
+        public static string texturePath;
+        public static string myname;
+
+        public MugTile(ModItem item, string texture) {
+            texturePath = texture;
             dropItem = item.item.whoAmI;
+            myname = item.item.HoverName;
         }
         public override bool Autoload(ref string name, ref string texture) {
+            name = myname;
+            texturePath = texture;
             return false;
         }
         public override void SetDefaults() {
