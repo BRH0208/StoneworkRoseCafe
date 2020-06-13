@@ -12,19 +12,21 @@ namespace StoneworkRoseCafe
 			new NewMug("Stone Mug","StoneMug"),
 			new NewMug("Glazed Stone Mug","GlazedStoneMug"),
 			new NewMug("Glass Mug","GlassMug"),
+			new NewMug("Blue-Spruce Mug","BlueSpruceStoneMug"),
 			new NewMug("Heat Treated Stone Mug","HeatTreatedStoneMug"),
-			new NewMug("Ceramic Mug","CeramicMug"),//finished to here
-			/*new NewMug("Porcelain Mug","PorcelaincMug"),
+			new NewMug("Ceramic Mug","CeramicMug"),
+			new NewMug("Porcelain Mug","PorcelainMug"),
 			new NewMug("Moziac Mug","MoziacMug"),
 			new NewMug("Specked Mug","SpeckledMug"),
 			new NewMug("Crimstone Mug","CrimstoneMug"),
 			new NewMug("Gold-Plated Mug","GoldPlatedMug"),
 			new NewMug("Calacatta Marble Mug","MarbleMug"),
 			new NewMug("Obsidian Mug","ObsidianMug"),
-			new NewMug("China Mug","ChinaMug"),
-			new NewMug("Stainless Steel Mug","Stainless Steele Mug"),
+			new NewMug("China Mug","China"),
+			new NewMug("Stainless Steel Mug","StainlessSteelMug"),
 			new NewMug("Beast Mug","BeastMug"),
-			new NewMug("Wooden Mug","WoodenMug"),*/
+			new NewMug("Wooden Mug","WoodenMug"),
+			new NewMug("Paper Mug","PaperMug"),
 		};
 		public override void Load() {
 			foreach (var mymug in mugs) {
