@@ -32,6 +32,7 @@ namespace StoneworkRoseCafe {
 		public override void PreUpdate() {
 			// Update everything about spawning the traveling merchant from the methods we have in the Traveling Merchant's class
 			EmissaryOfTheFlock.UpdateMerchandise();
+			Myriil.getPayout();
 		}
 	}
 }

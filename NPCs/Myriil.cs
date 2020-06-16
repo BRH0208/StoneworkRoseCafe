@@ -9,6 +9,8 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.Utilities;
+using System.Collections.Generic;
+using Terraria.ModLoader.IO;
 
 namespace StoneworkRoseCafe.NPCs {
 	// [AutoloadHead] and npc.townNPC are extremely important and absolutely both necessary for any Town NPC to work at all.
@@ -55,6 +57,10 @@ namespace StoneworkRoseCafe.NPCs {
 				return false;
 			return true;
 		}
+
+		public static Vector2 startHome = new Vector2(-1, -1);
+		public static Vector2 endHome = new Vector2(-1, -1);
+
 		public override bool CheckConditions(int left, int right, int top, int bottom) {
 			int score = 0;
 			bool tables = false;
@@ -73,9 +79,72 @@ namespace StoneworkRoseCafe.NPCs {
 					}
 				}
 			}
-			return tables && chairs && (score >= (right - left) * (bottom - top) * 0.75);
+			bool returnvalue = tables && chairs && (score >= (right - left) * (bottom - top) * 0.75);
+			if(returnvalue) {
+				startHome.X = left;
+				startHome.Y = top;
+
+				endHome.X = right;
+				endHome.Y = bottom;
+				getPayout();
+            }
+			return returnvalue;
 			//must have the Stone Rose tables, chairs, and at least 75% Dynasty or Boreal wood
 		}
+
+		public static int myPayout = -1;
+
+		public static void getPayout() {
+			if (startHome.X == -1) return;//quick check to see if Myriil is homeless or not without invoking `npc`
+			int value = 0;
+			int crowd = 0;
+			int tables = 0;
+			int chairs = 0;
+			List<int> usedMugs = new List<int>();
+			for (int x = (int)startHome.X; x <= endHome.X; x++) {
+				for (int y = (int)startHome.Y; y <= endHome.Y; y++) {
+					int type = Main.tile[x, y].type;
+
+					//is one of our mugs and no duplicates
+					if (StoneworkRoseCafe.MugIDs.Contains(type) && !usedMugs.Contains(type)) {
+						value += 5000; // fifty silver
+						usedMugs.Add(type);
+					}
+					else if (type == TileType<StoneRoseBench>()) {
+						tables += 1;
+						crowd += 2;
+					}
+					else if (type == TileType<StoneRoseChair>()) {
+						chairs += 1;
+						crowd += 2;
+					}
+					else if (type == TileType<StoneRoseTable>()) {
+						tables += 1;
+						crowd += 6;
+					}
+				}
+			}//end fors
+
+			while (tables != 0 && chairs > 0) {
+				if (chairs >= 2) {
+					value += 5000;
+					chairs -= 2;
+				}
+				else {
+					value += 2500;
+					chairs--;
+				}
+				tables--;
+			}
+
+			int area = (int) ( (endHome.X - startHome.X) * (endHome.Y - startHome.Y) );
+
+			crowd -= (int) (area * 0.1);
+
+			value -= crowd * 1000; // remove ten silver for every block overcrowding the shop (10% furniture)
+
+			myPayout = value;
+        }
 
 		public override string TownNPCName() {
 			switch (WorldGen.genRand.Next(4)) {
@@ -160,6 +229,8 @@ namespace StoneworkRoseCafe.NPCs {
 			//hints
 			chat.Add("I bet we can improve sales with more seating.");
 			chat.Add("A Coffee Pot would go a long way for effeciency around here.");
+			chat.Add("Unique coffee mugs sometimes bring in extra customers! They can be found around the world.");
+			chat.Add("If we make changes to the cafe, it may take a day to see results. That's how buisinesses work.");
 
 			return chat; // chat is implicitly cast to a string. You can also do "return chat.Get();" if that makes you feel better
 		}
@@ -167,22 +238,23 @@ namespace StoneworkRoseCafe.NPCs {
 			button = Language.GetTextValue("LegacyInterface.28");
 			Player player = Main.player[Main.myPlayer];
 			playerMod modPlayer = player.GetModPlayer<playerMod>();
-			button2 = "Collect (" + (modPlayer.recievedCafeCut || npc.homeless ? "0" : "1") + " Gold)";
+			button2 = "Collect (" + (modPlayer.recievedCafeCut || npc.homeless ? "0" : myPayout.ToString()) + " Copper)";
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop) {
 			if (firstButton) {
-				//bailout for the homeless
-				
 				shop = true;
-				// We want 3 different functionalities for chat buttons, so we use HasItem to change button 1 between a shop and upgrade action.
-				Main.PlaySound(SoundID.Item37); // Reforge/Anvil sound
-				
 			} else {
+				Main.player[Main.myPlayer].BuyItem(-10000);
 				if (npc.homeless) {
 					Main.npcChatText = "No cafe, no money. I need a place or we'll both go broke. Stonework Rose needs to be made of High Quality woods and signature furnature.";
 					return;
 				}
+
+				if(myPayout==0) {
+					Main.npcChatText = "It appears that customers are being driven away. It may be because of not enough furniture, or too much furnature.";
+					return;
+                }
 
 				Player player = Main.player[Main.myPlayer];
 				playerMod modPlayer = player.GetModPlayer<playerMod>();
@@ -225,7 +297,6 @@ namespace StoneworkRoseCafe.NPCs {
 						break;
 				}
 				modPlayer.recievedCafeCut = true;
-				Main.LocalPlayer.QuickSpawnItem(ItemID.GoldCoin);
 			}
 		}
 		public override void SetupShop(Chest shop, ref int nextSlot) {
@@ -239,6 +310,16 @@ namespace StoneworkRoseCafe.NPCs {
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemType<OwlItem>());
 			nextSlot++;
+		}
+
+		public static TagCompound Save() {
+			return new TagCompound {
+				["cafePayout"] = myPayout
+			};
+		}
+
+		public static void Load(TagCompound tag) {
+			myPayout = tag.Get<int>("cafePayout");
 		}
 
 		// Make this Town NPC teleport to the King and/or Queen statue when triggered.

@@ -1,5 +1,6 @@
 using StoneworkRoseCafe.Mugs;
 using StoneworkRoseCafe.Mugs.Tiles;
+using System.Collections.Generic;
 using Terraria.ModLoader;
 
 namespace StoneworkRoseCafe
@@ -28,12 +29,14 @@ namespace StoneworkRoseCafe
 			new NewMug("Wooden Mug","WoodenMug"),
 			new NewMug("Paper Mug","PaperMug"),
 		};
+		public static List<int> MugIDs = new List<int>();
 		public override void Load() {
 			foreach (var mymug in mugs) {
 				Mug item = new Mug(mymug.displayName, "StoneworkRoseCafe/Mugs/Items/" + mymug.texturePath + "Item");
 				MugTile tile = new MugTile(item, "StoneworkRoseCafe/Mugs/Tiles/" + mymug.texturePath + "Tile");
 				AddTile(mymug.displayName, tile, "StoneworkRoseCafe/Mugs/Tiles/" + mymug.texturePath + "Tile");
 				item.tile = tile.Type;
+				MugIDs.Add(tile.Type); //add so we can get all the mugs later
 				AddItem(mymug.displayName, item);
 				tile.drop = item.item.type;
 			}
