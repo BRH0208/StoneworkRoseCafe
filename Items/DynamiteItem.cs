@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
 namespace StoneworkRoseCafe.Items {
-	public class LivingDynamiteItem : ModItem {
+	public class DynamiteItem : ModItem {
 		public override void SetStaticDefaults() {
 			// DisplayName and Tooltip are automatically set from the .lang files, but below is how it is done normally.
 			DisplayName.SetDefault("Pet Dynamite");
