@@ -15,7 +15,7 @@ namespace StoneworkRoseCafe.Items {
 		public override void SetDefaults() {
 			item.CloneDefaults(ItemID.ZephyrFish);
 			item.shoot = ProjectileType<Projectiles.Pets.Dynamite>();
-			item.buffType = BuffType<Buffs.PetDynamiteBuff>();
+			item.buffType = BuffType<Buffs.DynamiteBuff>();
 		}
 
 		public override void UseStyle(Player player) {
