@@ -5,7 +5,7 @@ using Terraria.Localization;
 using System;
 using System.Collections;
 
-namespace Test.NPCs
+namespace StoneworkRoseCafe.NPCs
 {
 	[AutoloadHead]
 	public class Bryce : ModNPC{
