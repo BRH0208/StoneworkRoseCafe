@@ -7,7 +7,7 @@ namespace StoneworkRoseCafe.Buffs {
 		public override void SetDefaults() {
 			// DisplayName and Description are automatically set from the .lang files, but below is how it is done normally.
 			DisplayName.SetDefault("Living Dynamite");
-			Description.SetDefault("Someone gave a stick of dynamite consciousness and wings);
+			Description.SetDefault("Someone gave a stick of dynamite consciousness and wings");
 			Main.buffNoTimeDisplay[Type] = true;
 			Main.vanityPet[Type] = true;
 		}
