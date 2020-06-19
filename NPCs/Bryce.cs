@@ -9,7 +9,7 @@ namespace StoneworkRoseCafe.NPCs
 {
 	[AutoloadHead]
 	public class Bryce : ModNPC{
-		public override string Texture => "Test/NPCs/Bryce";
+		public override string Texture => "StoneworkRoseCafe/NPCs/Bryce";
 
 		public override bool Autoload(ref string name) {
 			name = "Agent of Chaos";
