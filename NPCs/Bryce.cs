@@ -72,25 +72,13 @@ namespace StoneworkRoseCafe.NPCs
 		}
 		/*
 		public override void SetupShop(Chest shop, ref int nextSlot) {
+			shop.item[nextSlot].SetDefaults(ItemType<Items.Dynamite>());
+			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemType<ExampleItem>());
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemType<EquipMaterial>());
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemType<BossItem>());
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleWorkbench>());
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleChair>());
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleDoor>());
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleBed>());
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleChest>());
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemType<ExamplePickaxe>());
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemType<ExampleHamaxe>());
 			nextSlot++;
 			if (Main.LocalPlayer.HasBuff(BuffID.Lifeforce)) {
 				shop.item[nextSlot].SetDefaults(ItemType<ExampleHealingPotion>());
