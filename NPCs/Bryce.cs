@@ -143,7 +143,8 @@ namespace StoneworkRoseCafe.NPCs
 			}
 		}
 		public override void SetupShop(Chest shop, ref int nextSlot) {
-			
+			shop.item[nextSlot].SetDefaults(ItemType<Items.Dynamite>());
+			nextSlot++;
 			if(!Main.dayTime){
 				shop.item[nextSlot].SetDefaults(ItemID.Obelisk);
 				nextSlot++;
