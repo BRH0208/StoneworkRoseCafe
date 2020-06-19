@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
 namespace StoneworkRoseCafe.Buffs {
-	public class PetDynamiteBuff : ModBuff {
+	public class DynamiteBuff : ModBuff {
 		public override void SetDefaults() {
 			// DisplayName and Description are automatically set from the .lang files, but below is how it is done normally.
 			DisplayName.SetDefault("Living Dynamite");
