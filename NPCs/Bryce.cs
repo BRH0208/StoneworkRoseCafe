@@ -2,9 +2,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using StoneworkRoseCafe.Items;
+using StoneworkRoseCafe.Projectiles;
+using StoneworkRoseCafe.Tiles;
 using System;
 using System.Collections;
-
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 namespace StoneworkRoseCafe.NPCs
 {
 	[AutoloadHead]
@@ -72,13 +76,25 @@ namespace StoneworkRoseCafe.NPCs
 		}
 		/*
 		public override void SetupShop(Chest shop, ref int nextSlot) {
-			shop.item[nextSlot].SetDefaults(ItemType<Items.Dynamite>());
-			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemType<ExampleItem>());
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemType<EquipMaterial>());
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemType<BossItem>());
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleWorkbench>());
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleChair>());
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleDoor>());
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleBed>());
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults(ItemType<Items.Placeable.ExampleChest>());
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults(ItemType<ExamplePickaxe>());
+			nextSlot++;
+			shop.item[nextSlot].SetDefaults(ItemType<ExampleHamaxe>());
 			nextSlot++;
 			if (Main.LocalPlayer.HasBuff(BuffID.Lifeforce)) {
 				shop.item[nextSlot].SetDefaults(ItemType<ExampleHealingPotion>());
@@ -143,7 +159,7 @@ namespace StoneworkRoseCafe.NPCs
 			}
 		}
 		public override void SetupShop(Chest shop, ref int nextSlot) {
-			shop.item[nextSlot].SetDefaults(ItemType<Items.Dynamite>());
+			shop.item[nextSlot].SetDefaults(ItemType<Items.DynamiteItem>());
 			nextSlot++;
 			if(!Main.dayTime){
 				shop.item[nextSlot].SetDefaults(ItemID.Obelisk);
