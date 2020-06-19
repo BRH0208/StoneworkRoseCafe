@@ -1,4 +1,4 @@
-  \using StoneworkRoseCafe.Tiles;
+using StoneworkRoseCafe.Tiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
