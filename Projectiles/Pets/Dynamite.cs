@@ -3,7 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace StoneworkRoseCafe.Projectiles.Pets {
-	public class LivingDynamite : ModProjectile {
+	public class Dynamite : ModProjectile {
 		public override void SetStaticDefaults() {
 			DisplayName.SetDefault("Living Dynamite"); // Automatic from .lang files
 			Main.projFrames[projectile.type] = 5;
