@@ -2,14 +2,18 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using StoneworkRoseCafe.Items;
+using StoneworkRoseCafe.Projectiles;
+using StoneworkRoseCafe.Tiles;
 using System;
 using System.Collections;
-
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 namespace StoneworkRoseCafe.NPCs
 {
 	[AutoloadHead]
 	public class Bryce : ModNPC{
-		public override string Texture => "Test/NPCs/Bryce";
+		public override string Texture => "StoneworkRoseCafe/NPCs/Bryce";
 
 		public override bool Autoload(ref string name) {
 			name = "Agent of Chaos";
@@ -155,7 +159,8 @@ namespace StoneworkRoseCafe.NPCs
 			}
 		}
 		public override void SetupShop(Chest shop, ref int nextSlot) {
-			
+			shop.item[nextSlot].SetDefaults(ItemType<Items.DynamiteItem>());
+			nextSlot++;
 			if(!Main.dayTime){
 				shop.item[nextSlot].SetDefaults(ItemID.Obelisk);
 				nextSlot++;

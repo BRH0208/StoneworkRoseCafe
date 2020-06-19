@@ -21,11 +21,13 @@ namespace StoneworkRoseCafe {
 	// several effects and items in ExampleMod. See SimpleModPlayer for a very simple example of how ModPlayer classes work.
 	public class playerMod : ModPlayer {
 		public bool owlPet;
+		public bool dynamitePet;
 		public bool examplePersonGiftReceived;
 		public bool recievedCafeCut;
 
 		public override void ResetEffects() {
 			owlPet = false;
+			dynamitePet = false;
 		}
 
         public override void PreUpdate() {
