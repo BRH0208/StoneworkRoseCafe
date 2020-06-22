@@ -46,17 +46,9 @@ namespace StoneworkRoseCafe.NPCs
 			animationType = NPCID.Guide;
 		}
 		public override bool CanTownNPCSpawn(int numTownNPCs, int money) {
-			for (int k = 0; k < 255; k++) {
-				Player player = Main.player[k];
-				if (!player.active) {
-					continue;
-				}
-
-				foreach (Item item in player.inventory) {
-					if (item.type == 267){
-						return true;
-					}
-				}
+			
+			for (int k = 0; k < NPC.killCount.Length; k++) {
+				if(NPC.killCount[k] > 500) return true;
 			}
 			return false;
 		}
@@ -378,7 +370,7 @@ namespace StoneworkRoseCafe.NPCs
 					damage = 14;
 				}
 			}else{
-				damage = 4
+				damage = 4;
 			}
 			knockback = 100f;
 		}
